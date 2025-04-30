@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping
     public Collection<User> findAll() {
-        log.info("Список всех пользователей получен: {}",users.values());
+        log.info("Список всех пользователей получен: {}", users.values());
         return users.values();
     }
 
@@ -34,6 +34,7 @@ public class UserController {
         log.info("Новый пользователь добавлен: {}", user);
         return user;
     }
+
     private long getNextId() {
         long currentMaxId = users.keySet()
                 .stream()
@@ -45,13 +46,13 @@ public class UserController {
 
     @PutMapping
     public User update(@RequestBody User newUser) {
-        log.info("Получен запрос на обновление пользователя с id {}",newUser.getId());
+        log.info("Получен запрос на обновление пользователя с id {}", newUser.getId());
         if (users.containsKey(newUser.getId())) {
             User oldUser = users.get(newUser.getId());
-            log.info("Пользователь найден: {}",oldUser);
+            log.info("Пользователь найден: {}", oldUser);
             if (newUser.getName() == null || newUser.getName().isBlank()) {
                 oldUser.setName(newUser.getLogin());
-            }else{
+            } else {
                 oldUser.setName(newUser.getName());
             }
             oldUser.setEmail(newUser.getEmail());
@@ -60,9 +61,6 @@ public class UserController {
             log.info("Пользователь обновлен: {}", oldUser);
             return oldUser;
         }
-            throw new ValidationException("Пользователя с указанным id не существует.");
-        }
-
-
-
+        throw new ValidationException("Пользователя с указанным id не существует.");
+    }
 }
