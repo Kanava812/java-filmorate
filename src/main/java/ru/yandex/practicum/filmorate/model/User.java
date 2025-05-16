@@ -7,13 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("/users")
 @Data
 public class User {
     private long id;
 
     @Email(message = "Адрес должен содержать символ @.")
-    @NotNull(message = "Не может быть null.")
     @NotBlank
     private String email;
 

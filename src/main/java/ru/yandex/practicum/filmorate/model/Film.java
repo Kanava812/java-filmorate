@@ -14,7 +14,6 @@ import java.time.LocalDate;
 public class Film {
      private long id;
 
-     @NotNull(message = "Не может быть null.")
      @NotBlank(message = "Не может быть пустым.")
      private String name;
 

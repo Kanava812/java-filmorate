@@ -13,7 +13,6 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/users")
-@Valid
 public class UserController {
     private final Map<Long, User> users = new HashMap<>();
 
