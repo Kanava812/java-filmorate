@@ -8,8 +8,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.yandex.practicum.filmorate.ValidationException;
+import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.controller.FilmController;
+import ru.yandex.practicum.filmorate.service.FilmService;
+import ru.yandex.practicum.filmorate.storage.user.film.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -52,7 +55,7 @@ public class FilmTest {
     @Test
     public void releaseDateTest() throws ValidationException {
         film.setReleaseDate(LocalDate.of(1895, 12, 20));
-        FilmController fc = new FilmController();
+        FilmController fc = new FilmController(new FilmService(new InMemoryFilmStorage(), new InMemoryUserStorage()));
         ValidationException e = assertThrows(ValidationException.class, () -> fc.create(film));
         Assertions.assertEquals("Дата релиза не раньше 28.12.1895.", e.getMessage());
     }
