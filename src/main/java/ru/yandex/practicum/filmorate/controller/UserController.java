@@ -1,8 +1,10 @@
 package ru.yandex.practicum.filmorate.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
@@ -13,6 +15,7 @@ import java.util.Collection;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Validated
 public class UserController {
     private final UserService userService;
 
@@ -32,17 +35,21 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable long id) {
+    public User getById(@PathVariable @Positive(message = "ID должен быть положительным числом") long id) {
         return userService.getById(id);
     }
 
     @PutMapping("/{id}/friends/{friendId}")
-    public void addFriend(@PathVariable("id") long id, @PathVariable("friendId") long friendId) {
+    public void addFriend(@PathVariable("id") @Positive(message = "ID должен быть положительным числом") long id,
+                          @PathVariable("friendId") @Positive(message = "ID должен быть положительным числом") long
+                                  friendId) {
         userService.addFriend(id, friendId);
     }
 
     @DeleteMapping("/{id}/friends/{friendId}")
-    public void deleteFriend(@PathVariable("id") long id, @PathVariable("friendId") long friendId) {
+    public void deleteFriend(@PathVariable("id") @Positive(message = "ID должен быть положительным числом") long id,
+                             @PathVariable("friendId") @Positive(message = "ID должен быть положительным числом") long
+                                     friendId) {
         userService.deleteFriend(id, friendId);
     }
 
@@ -52,7 +59,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
-    public Collection<User> getCommonFriends(@PathVariable("id") long id, @PathVariable("otherId") long otherId) {
+    public Collection<User> getCommonFriends(@PathVariable("id") @Positive(message = "ID должен быть положительным " +
+            "числом") long id, @PathVariable("otherId") @Positive(message = "ID должен быть положительным числом") long
+                                                     otherId) {
         return userService.getCommonFriends(id, otherId);
     }
 }
