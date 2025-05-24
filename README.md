@@ -83,26 +83,26 @@ Template repository for Filmorate project.
 
 
 ## Примеры работы с базой
-SELECT * FROM films;
-Получить все поля из таблицы FILMS
-
-SELECT films.name,
-films.description,
-genres.name AS genre
-FROM films
-JOIN film_genre ON films.id = film_genre.film_id
-JOIN genres ON film_genre.genre_id = genres.id;
-Получить названия, описания фильмов и жанры
-
-SELECT genres.name,
-COUNT(Film_Genre.film_id) AS film_count
-FROM genres
-LEFT JOIN film_genre ON genres.id = film_genre.genre_id
-GROUP BY genres.id;
-Получить все жанры и количество фильмов каждого жанра
-
-SELECT users.name,
-users.email,
-FROM users
-WHERE birthday>='01.01.2012;
-Получить имя и почту пользователей, родившихся в 2012г и позже
+SELECT * FROM films;<br />
+Получить все поля из таблицы FILMS<br />
+<br />
+SELECT films.name,<br />
+films.description,<br />
+genres.name <br />
+FROM films<br />
+JOIN film_genre ON films.id = film_genre.film_id<br />
+JOIN genres ON film_genre.genre_id = genres.id;<br />
+Получить названия, описания фильмов и жанры<br />
+<br />
+SELECT genres.name,<br />
+COUNT(Film_Genre.film_id) AS film_count<br />
+FROM genres<br />
+LEFT JOIN film_genre ON genres.id = film_genre.genre_id<br />
+GROUP BY genres.id;<br />
+Получить все жанры и количество фильмов каждого жанра<br />
+<br />
+SELECT users.name,<br />
+users.email,<br />
+FROM users<br />
+WHERE birthday>='01.01.2012;<br />
+Получить имя и почту пользователей, родившихся в 2012г и позже<br />
