@@ -4,6 +4,8 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @Data
@@ -23,4 +25,6 @@ public class User {
 
     @PastOrPresent(message = "ДР не может быть в будущем.")
     private LocalDate birthday;
+
+    private Set<Long> friends = new HashSet<>();
 }
