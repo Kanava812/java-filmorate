@@ -101,7 +101,7 @@ LEFT JOIN film_genre ON genres.id = film_genre.genre_id<br />
 GROUP BY genres.id;<br />
 Получить все жанры и количество фильмов каждого жанра<br />
 <br />
-SELECT films.name, COUNT(likes.user_id) AS like_count<br />
+SELECT films.name, COUNT(likes.user_id)<br />
 FROM films <br />
 LEFT JOIN likes ON films.id = likes.film_id<br />
 GROUP BY film.name<br />
