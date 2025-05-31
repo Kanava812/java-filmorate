@@ -112,5 +112,5 @@ LIMIT 10;<br />
 SELECT users.name,<br />
 users.email<br />
 FROM users<br />
-WHERE birthday>='01.01.2012;<br />
+WHERE birthday>='01.01.2012';<br />
 Получить имя и почту пользователей, родившихся в 2012г и позже<br />
