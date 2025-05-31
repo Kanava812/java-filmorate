@@ -95,7 +95,7 @@ JOIN genres ON film_genre.genre_id = genres.id;<br />
 Получить названия, описания фильмов и жанры<br />
 <br />
 SELECT genres.name,<br />
-COUNT(Film_Genre.film_id) AS film_count<br />
+COUNT(film_genre.film_id) AS film_count<br />
 FROM genres<br />
 LEFT JOIN film_genre ON genres.id = film_genre.genre_id<br />
 GROUP BY genres.id;<br />
@@ -104,13 +104,13 @@ GROUP BY genres.id;<br />
 SELECT films.name, COUNT(likes.user_id)<br />
 FROM films <br />
 LEFT JOIN likes ON films.id = likes.film_id<br />
-GROUP BY film.name<br />
+GROUP BY films.name<br />
 ORDER BY COUNT(likes.user_id) DESC<br />
 LIMIT 10;<br />
 Получить названия 10 самых популярных фильмов (по количеству лайков)<br />
 <br />
 SELECT users.name,<br />
-users.email,<br />
+users.email<br />
 FROM users<br />
 WHERE birthday>='01.01.2012;<br />
 Получить имя и почту пользователей, родившихся в 2012г и позже<br />
