@@ -8,10 +8,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.model.Genre;
-import ru.yandex.practicum.filmorate.storage.genre.GenreStorage;
 import ru.yandex.practicum.filmorate.storage.mapper.FilmExtractor;
-import ru.yandex.practicum.filmorate.storage.MPA.MpaStorage;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -25,19 +22,9 @@ import java.util.stream.Collectors;
 public class FilmDbStorage implements FilmStorage {
     private final JdbcTemplate jdbcTemplate;
     private final FilmExtractor filmExtractor;
-    private final GenreStorage genreStorage;
-    private final MpaStorage mpaStorage;
 
     @Override
     public Film create(Film film) {
-        mpaStorage.getMpaById(film.getMpa().getId())
-                .orElseThrow(() -> new NotFoundException("MPA с ID " + film.getMpa().getId() + " не найден"));
-        if (film.getGenres() != null) {
-            for (Genre genre : film.getGenres()) {
-                genreStorage.getGenreById(genre.getId())
-                        .orElseThrow(() -> new NotFoundException("Жанр с ID " + genre.getId() + " не найден"));
-            }
-        }
         String sql = "INSERT INTO films (name, description, release_date, duration, mpa_id) VALUES (?, ?, ?, ?, ?);";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {

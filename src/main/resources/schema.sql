@@ -1,19 +1,19 @@
 CREATE TABLE IF NOT EXISTS users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name VARCHAR(255),
-    login VARCHAR(255) NOT NULL CHECK (LENGTH(login) >= 3),
-    email VARCHAR(255),
+    name VARCHAR(100),
+    login VARCHAR(50) NOT NULL CHECK (LENGTH(login) >= 3),
+    email VARCHAR(100),
     birthday TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS mpa_ratings (
     mpa_id BIGINT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(100) NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS films (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     description VARCHAR(255),
     release_date TIMESTAMP,
     duration INTEGER NOT NULL CHECK (duration > 0),
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS films (
 
 CREATE TABLE IF NOT EXISTS genres (
     genre_id BIGINT PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(50)
 );
 
 CREATE TABLE IF NOT EXISTS film_genres (
