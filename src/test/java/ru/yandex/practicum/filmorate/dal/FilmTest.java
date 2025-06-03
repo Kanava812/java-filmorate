@@ -19,7 +19,6 @@ import ru.yandex.practicum.filmorate.storage.mapper.GenreMapper;
 import ru.yandex.practicum.filmorate.storage.mapper.MpaMapper;
 import ru.yandex.practicum.filmorate.storage.mapper.UserMapper;
 import ru.yandex.practicum.filmorate.storage.user.UserDbStorage;
-import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 import java.time.LocalDate;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
