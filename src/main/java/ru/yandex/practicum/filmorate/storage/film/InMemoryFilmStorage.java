@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.storage.user.film;
+package ru.yandex.practicum.filmorate.storage.film;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@Deprecated
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
     private final Map<Long, Film> films = new HashMap<>();

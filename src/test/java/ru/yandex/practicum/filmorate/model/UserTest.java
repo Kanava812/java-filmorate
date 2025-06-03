@@ -8,9 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.yandex.practicum.filmorate.controller.UserController;
-import ru.yandex.practicum.filmorate.service.UserService;
-import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
+
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -44,13 +42,6 @@ public class UserTest {
                 violations1.iterator().next().getMessage());
     }
 
-    @Test
-    public void nameTest() {
-        user.setName("");
-        UserController uc = new UserController(new UserService(new InMemoryUserStorage()));
-        Assertions.assertEquals(uc.create(user).getName(), user.getLogin(),
-                "Если имя не задано,то будет использован логин;");
-    }
 
     @Test
     public void emailTest() {

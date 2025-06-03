@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@Deprecated
 @Component
 public class InMemoryUserStorage implements UserStorage {
     private final Map<Long, User> users = new HashMap<>();

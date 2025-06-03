@@ -1,30 +1,37 @@
 package ru.yandex.practicum.filmorate.model;
 
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-@RestController
+@Builder
+@NoArgsConstructor
 @Data
 public class User {
     private long id;
 
-    @Email(message = "Адрес должен содержать символ @.")
-    @NotBlank
-    private String email;
+    private String name;
 
     @NotBlank(message = "Логин не может быть пустым.")
     @Pattern(regexp = "^\\S+$", message = "Логин не должен содержать пробелы.")
     @NotNull(message = "Не может быть null.")
     private String login;
 
-    private String name;
+    @Email(message = "Адрес должен содержать символ @.")
+    @NotBlank
+    private String email;
 
     @PastOrPresent(message = "ДР не может быть в будущем.")
     private LocalDate birthday;
 
-    private Set<Long> friends = new HashSet<>();
+
+    public User(Long id, String name, String login, String email, LocalDate birthday) {
+        this.id = id;
+        this.email = email;
+        this.login = login;
+        this.name = name;
+        this.birthday = birthday;
+    }
 }
