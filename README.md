@@ -24,11 +24,6 @@ Template repository for Filmorate project.
 
 - **FRIEND ID** - идентификатор пользователя, которому поступил запрос (int)
 
-- **STATUS** - состояние запроса (boolean)
-
->**true** - принят\
-**false** - ожидание подтверждения/отклонен
-
 ### <ins>FILMS</ins>
 
 - **ID** - идентификатор фильма (int)
