@@ -8,16 +8,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.yandex.practicum.filmorate.exception.ValidationException;
-import ru.yandex.practicum.filmorate.controller.FilmController;
-import ru.yandex.practicum.filmorate.service.FilmService;
-import ru.yandex.practicum.filmorate.storage.user.film.InMemoryFilmStorage;
-import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
-
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class FilmTest {
@@ -53,11 +47,16 @@ public class FilmTest {
     }
 
     @Test
-    public void releaseDateTest() throws ValidationException {
-        film.setReleaseDate(LocalDate.of(1895, 12, 20));
-        FilmController fc = new FilmController(new FilmService(new InMemoryFilmStorage(), new InMemoryUserStorage()));
-        ValidationException e = assertThrows(ValidationException.class, () -> fc.create(film));
-        Assertions.assertEquals("Дата релиза не раньше 28.12.1895.", e.getMessage());
+    void releaseDateTest() {
+        Mpa mpa = new Mpa(1L, "G");
+        Set<Genre> genres = new HashSet<>(1);
+        Film film = new Film(1L, "Name", "Description", LocalDate.of(1895, 12,
+                27), 100, mpa, genres);
+        Set<ConstraintViolation<Film>> violations = validator.validate(film);
+
+        assertEquals(1, violations.size(), "Должна быть одна ошибка валидации");
+        assertEquals("Дата выхода должна быть не раньше 28 декабря 1895 года.", violations.iterator().next()
+                .getMessage());
     }
 
     @Test
